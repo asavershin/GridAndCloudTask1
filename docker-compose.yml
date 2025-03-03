@@ -1,0 +1,32 @@
+networks:
+  asavershin:
+    name: asavershin
+    driver: bridge
+
+services:
+  asavershin-db:
+    networks:
+      - asavershin
+    image: postgres:15.1-alpine
+    container_name: asavershin-db
+    env_file:
+      - .env
+    ports:
+      - "5440:5432"
+    volumes:
+      - asavershin-db-data:/var/lib/postgresql/data/
+
+  asavershin-backend:
+    container_name: asavershin-backend
+    networks:
+      - asavershin
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8081"
+    env_file:
+      - .env
+
+volumes:
+  asavershin-db-data:
