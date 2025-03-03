@@ -1,0 +1,10 @@
+.idea/
+.github/
+*.iml
+target/
+*.log
+*.md
+Dockerfile
+.dockerignore
+*.git
+*.gitignore
